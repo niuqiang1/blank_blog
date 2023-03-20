@@ -1,8 +1,18 @@
+@import "./var.less";
+
+// ====common====
 body {
     margin: auto;
     padding: 1.5rem;
     max-width: 80ch;
+    color:@c-normal;
 }
+a{
+    text-decoration: none;
+    color:@c-normal;
+}
+
+
 
 // =====nav=====
 .nav{
@@ -10,4 +20,12 @@ body {
     list-style: none;
     display: flex;
     column-gap:16px;
+    a{
+        font-size: @f-xl;
+    }
+    &-active{
+        a {
+            color:@c-active;
+        }
+    }
 }
