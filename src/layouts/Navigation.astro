@@ -1,0 +1,8 @@
+---
+    import { nav } from "@data/nav"
+---
+<ul class="nav">
+    {
+    nav.map(item=> <li> <a href={item.slug}>{item.title}</a> </li>)
+    }
+</ul>
