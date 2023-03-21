@@ -1,22 +1,23 @@
 ---
-import { nav } from "@data/nav";
+import { nav } from '@data/nav'
 
 export interface Props {
-  activeNav?:string
+  activeNav?: string
 }
 
-
-const { activeNav } = Astro.props;
-const index = nav.findIndex(i=>i.title===activeNav)
+const { activeNav } = Astro.props
+const index = nav.findIndex(i => i.title === activeNav)
 ---
 
-<ul class="nav">
-    <div class="nav-index">{index+1}</div>
+<nav>
+  <span class="index">0{index + 1}</span>
+  <ul class="nav">
     {
-        nav.map((item) => (
-            <li class={activeNav === item.title ? "nav-active" : ""}>
-                <a href={item.slug}>{item.title}</a>
-            </li>
-        ))
+      nav.map(item => (
+        <li class={activeNav === item.title ? 'nav-active' : ''}>
+          <a href={item.slug}>{item.title}</a>
+        </li>
+      ))
     }
-</ul>
+  </ul>
+</nav>

@@ -1,39 +1,52 @@
 ---
-import "../style/style.less"
+import '../style/style.less'
 export interface Props {
-	title: string ;
+  title: string
+  deg:string
 }
-import Navigation from './Navigation.astro';
-const { title } = Astro.props;
+import Navigation from './Navigation.astro'
+import rightIcon from '../images/right.svg'
+import leftIcon from '../images/left.svg'
+
+
+
+import { profile } from '@data/profile'
+
+
+import {getPrevNav, getNextNav} from "../utils/nav"
+const { title, deg } = Astro.props
+
+const nextNav = getNextNav(title)
+const prevNav = getPrevNav(title)
+const bgDeg = `linear-gradient(${deg}deg, #fff 50%, #93d5dc 50%)`
+
 ---
 
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>{title}</title>
-	</head>
-	<body>
-		<Navigation activeNav={title}></Navigation>
-		<slot />
-	</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}-{profile.name}的小站</title>
+	<style define:vars={{bgDeg}}>
+		body{
+			background: var(--bgDeg);
+		}
+	</style>
+	
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="card">
+		{prevNav? <span class="prev"> <a href={prevNav as string} > <img src={leftIcon} alt="" /></a></span> : ''}
+        {nextNav?  <span class="next"> <a href={nextNav as string}><img src={rightIcon} alt="" /></a></span> :''}
+        <Navigation activeNav={title} />
+        <main>
+          <slot />
+        </main>
+      </div>
+    </div>
+  </body>
 </html>
-<style lang="less" is:global >
-	:root {
-		--accent: 124, 58, 237;
-		--accent-gradient: linear-gradient(45deg, rgb(var(--accent)), #da62c4 30%, white 60%);
-	}
-	html {
-		font-family: system-ui, sans-serif;
-		background-color: #ebebeb;
-		background-image: url(../images/texture.png) ;
-		
-	}
-	code {
-		font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,
-			Bitstream Vera Sans Mono, Courier New, monospace;
-	}
-</style>
