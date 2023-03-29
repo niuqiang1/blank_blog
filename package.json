@@ -10,8 +10,9 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^2.0.18",
-    "postcss-pxtorem": "^6.0.0"
+    "astro": "^2.1.0",
+    "postcss-pxtorem": "^6.0.0",
+    "remark-autolink-headings": "^7.0.1"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.14",

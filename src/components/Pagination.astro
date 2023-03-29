@@ -1,0 +1,84 @@
+---
+import { Page } from 'Astro'
+export interface Props {
+  page: Page
+  style:string
+}
+
+const { page,style } = Astro.props
+
+const getPageIndex = (currentUrl: string, index: string): string => {
+  let currentIndex = currentUrl.split('/')
+  currentIndex[2] = index
+  return currentIndex.join('/')
+}
+---
+
+<div class="pagination" style={style}>
+  <ul>
+    <li class={`page-nav ${page.url.prev ? '' : 'disabled'}`}>
+      <a href={page.url.prev}>上一页</a>
+    </li>
+    {
+      new Array(page.lastPage).fill(1).map((_, index) => (
+        <li
+          class={
+            index + 1 === page.currentPage ? 'page-item active' : 'page-item'
+          }
+        >
+          <a href={getPageIndex(page.url.current, String(index + 1))}>
+            {index + 1}
+          </a>
+        </li>
+      ))
+    }
+    <li class={`page-nav ${page.url.next ? '' : 'disabled'}`}>
+      <a href={page.url.next}>下一页</a>
+    </li>
+  </ul>
+</div>
+
+<style lang="less">
+  @import '../style/var.less';
+  .pagination {
+    text-align: center;
+    margin-top: @gap-md;
+    ul {
+      display: inline-flex;
+      li {
+        width: 40px;
+        height: 40px;
+        line-height: 40px;
+        a {
+          width: 100%;
+          height: 100%;
+          display: inline-block;
+        }
+        + li {
+          margin-left: @gap-sm;
+        }
+        &.page-item {
+          border: 1px solid @c-sub;
+          border-radius: 5px;
+          &.active {
+            border-color: @c-active;
+            a {
+              font-weight: 500;
+              color: @c-active;
+            }
+          }
+        }
+        &.page-nav {
+          font-size: @f-md;
+          width: 70px;
+          &.disabled {
+            a {
+              color: @c-disabled;
+            }
+            cursor: not-allowed;
+          }
+        }
+      }
+    }
+  }
+</style>

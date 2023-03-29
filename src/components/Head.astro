@@ -1,0 +1,31 @@
+---
+import { profile } from '@data/profile'
+
+const siteInfo = {
+	siteName: '憨夯仔的网站',
+	siteDesc: 'This is a simple blog'
+}
+
+export interface Props {
+	title: string
+	desc: string
+}
+
+let { title, desc } = Astro.props
+
+if (!title) {
+	title = siteInfo.siteName
+}
+if (!desc) {
+	desc = siteInfo.siteDesc
+}
+---
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width" />
+	<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+	{title && <title>{`${title}-${profile.name}的小站`}</title>}
+	{desc && <meta name="description" content={desc} />}
+	<slot />
+</head>

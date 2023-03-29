@@ -1,0 +1,94 @@
+---
+import Layout from '../../layouts/Layout.astro'
+import { Post, getCategorys } from '@data/post'
+import rect from '@images/rect.svg'
+
+const markdownFiles = await Astro.glob('../../content/**/*.md')
+const tags = getCategorys(markdownFiles)
+console.log(tags)
+---
+
+<Layout title="分类" deg="-85">
+	<img class="bg-img" src={rect} width="100" alt="" />
+	<p class="bg-text bottom">TAGS</p>
+
+	<div class="category">
+		<ul>
+			{
+				tags.map(tag => (
+					<li>
+						<a href={`category/${tag}/1`}>{tag}</a>
+					</li>
+				))
+			}
+		</ul>
+	</div>
+</Layout>
+
+<style lang="less">
+	@import '../../style/var.less';
+	.bg-img {
+		right: 140px;
+		top: 80px;
+		transform: scale(4);
+		opacity: 0.2;
+	}
+	.bg-text {
+		left: 30px;
+		bottom: 0px;
+		font-size: 150px;
+		opacity: 0.1;
+	}
+	.category {
+		width: 100%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 700px;
+		padding: 40px 30px 20px 30px;
+		overflow-y: auto;
+		margin: 20px auto 0px auto;
+		background-image: none;
+		background-color: rgba(#fff, 0.3);
+		background-size: 400%;
+		background-position: 100%;
+
+		position: relative;
+
+		ul {
+			display: flex;
+			flex-wrap: wrap;
+			column-gap: 40px;
+			row-gap: 40px;
+
+			li {
+				cursor: pointer;
+				text-align: center;
+				height: 60px;
+				line-height: 60px;
+				border-radius: 3px;
+				box-shadow: 0 2px 8px 0 rgba(99, 99, 99, 0.2);
+				transition: background-position 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+				background-image: none;
+				background-color: rgba(#fff, 0.3);
+				background-size: 200%;
+				background-position: 60%;
+				a {
+					color: @c-sub;
+
+					padding: 0px 30px;
+
+					display: inline-block;
+				}
+				&:hover,
+				&:focus-within {
+					background-position: 0;
+					background-image: linear-gradient(20deg, #93d5dc 0%, #fff 100%);
+					a {
+						color: @c-normal;
+					}
+				}
+			}
+		}
+	}
+</style>

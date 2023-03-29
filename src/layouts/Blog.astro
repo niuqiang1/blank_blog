@@ -1,0 +1,57 @@
+---
+import Navigation from '../components/Navigation.astro'
+import rect from '@images/rect.svg'
+
+import '../style/style.less'
+export interface Props {
+	deg?: string
+	tag?: string
+}
+const { deg } = Astro.props
+const bgDeg = `linear-gradient(${deg}deg, #fff 50%, #93d5dc 50%)`
+---
+
+<!DOCTYPE html>
+<html lang="en">
+	<style define:vars={{ bgDeg }} lang="less">
+		body {
+			background: var(--bgDeg);
+		}
+		.card {
+			padding-bottom: 0px;
+			overflow: hidden;
+			position: relative;
+			.bg-img {
+				position: absolute;
+				left: 160px;
+				top: 60px;
+				transform: scale(4);
+				opacity: 0.2;
+			}
+			.bg-img2 {
+				position: absolute;
+				right: 120px;
+				bottom: 60px;
+				transform: scale(3.6);
+				opacity: 0.2;
+			}
+		}
+		main {
+			height: 0;
+			position: relative;
+			z-index: 10;
+		}
+	</style>
+	<body>
+		<div class="wrapper">
+			<div class="card">
+				<img class="bg-img" src={rect} width="100" alt="" />
+				<img class="bg-img2" src={rect} width="70" alt="" />
+				<Navigation isBlog={true} />
+				<main>
+					<slot />
+				</main>
+			</div>
+		</div>
+	</body>
+</html>

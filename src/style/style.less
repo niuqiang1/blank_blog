@@ -32,9 +32,32 @@ body {
     height: 100%;
     width: 100%;
     overflow: hidden;
-	transition: "background" 1s ease-in-out;
+	transition: "background"  ease-in-out 1s;
 
 }
+
+/* 通用滚动条样式 */
+::-webkit-scrollbar {
+    width: 5px; /* 垂直滚动条宽度 */
+    height: 5px; /* 水平滚动条高度 */
+  }
+  
+  /* 滚动条轨道样式 */
+  ::-webkit-scrollbar-track {
+    background-color: transparent;
+    border-radius: 10px;
+  }
+  
+  /* 滚动条滑块样式 */
+  ::-webkit-scrollbar-thumb {
+    background-color: @c-sub;
+    border-radius: 10px;
+  }
+  
+  /* 滑块hover样式 */
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: @c-desc;
+  }
 
 // ====== custom =========
 .text{
@@ -96,6 +119,10 @@ body {
     }
   
 }
+.bg-img,.bg-text{
+    z-index: 0;
+    position: absolute;
+}
 
 
 
@@ -112,6 +139,21 @@ nav{
         top: -30px;
         font-weight: 500;
         letter-spacing: 0px;
+    }
+    .back{
+        z-index: 1;
+        position: absolute;
+        top:calc(50% - 25px);
+        cursor: pointer;
+        transition: all ease 1s;
+
+        img{
+            width: 50px;
+        }
+        &:hover{
+            left: -3px;
+            transform: scale(1.2);
+        }
     }
     .nav{
         padding-left: 50px;
@@ -132,7 +174,11 @@ nav{
                     font-weight: 500;
                 }
             }
-        }   
+        }  
+        
+        &.is-blog{
+            padding-left: 80px;
+        }
        
         
         

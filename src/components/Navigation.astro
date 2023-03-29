@@ -1,0 +1,41 @@
+---
+import { nav } from '@data/nav'
+import { setSlug } from '@utils/nav'
+import Back from '@images/back.svg'
+export interface Props {
+	activeNav?: string
+	isBlog?: boolean
+}
+
+const { activeNav, isBlog } = Astro.props
+const index = nav.findIndex(i => i.title === activeNav)
+---
+
+<nav>
+	{
+		isBlog ? (
+			<span class="back">
+				<a>
+					<img src={Back} alt="" />
+				</a>
+			</span>
+		) : (
+			<span class="index">0{index + 1}</span>
+		)
+	}
+
+	<ul class={isBlog ? 'nav is-blog' : 'nav'}>
+		{
+			nav.map(item => (
+				<li class={activeNav === item.title ? 'nav-active' : ''}>
+					<a href={setSlug(item)}>{item.title}</a>
+				</li>
+			))
+		}
+	</ul>
+</nav>
+<script>
+	document.querySelector('.back a')?.addEventListener('click', e => {
+		history.back()
+	})
+</script>

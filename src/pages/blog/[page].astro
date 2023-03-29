@@ -1,0 +1,85 @@
+---
+import Layout from '../../layouts/Layout.astro'
+import Card from '../../components/Card.astro'
+import Pagination from '@components/Pagination'
+import rect from '@images/rect.svg'
+import { publish, type Post } from '@data/post'
+import { Page } from 'astro'
+
+export interface Props {
+	page: Page<Post>
+}
+
+export async function getStaticPaths({ paginate }) {
+	const markdwonFiles = await Astro.glob('../../content/**/*.md')
+	const published = publish(markdwonFiles)
+	return paginate(published, { pageSize: 3 })
+}
+
+const { page } = Astro.props
+const pageStyle: any = {
+	position: 'absolute',
+	bottom: '30px',
+	left: '0px',
+	width: '100%'
+}
+---
+
+<Layout title="博客" deg="-25">
+	<div class="blog">
+		<img class="bg-img" src={rect} width="100" alt="" />
+		<p class="bg-text bottom">ALL BLOGS</p>
+		<ul role="list" class="link-card-grid">
+			{
+				page.data.map(p => (
+					<Card
+						href={`/post/${p.slug}`}
+						title={p.title}
+						body={p.desc}
+						img={p.cover as unknown as string}
+					/>
+				))
+			}
+		</ul>
+		<Pagination page={page} style={pageStyle} />
+	</div>
+</Layout>
+
+<style lang="less">
+	@import '../../style/var.less';
+	.bg-text {
+		position: absolute;
+		color: @c-sub;
+		opacity: 0.1;
+	}
+	.blog {
+		height: 100%;
+		margin-top: @gap-lg;
+		padding: 0px @gap-xl;
+		position: relative;
+
+		.bg-img {
+			position: absolute;
+			right: 160px;
+			transform: scale(4);
+			opacity: 0.2;
+		}
+		.bg-text.bottom {
+			font-size: 100px;
+			font-weight: 800;
+			bottom: 50px;
+			right: 20px;
+		}
+	}
+
+	.link-card-grid {
+		width: 100%;
+		display: grid;
+		grid-template-columns: repeat(3, minmax(24ch, 1fr));
+		grid-auto-rows: 420px;
+		gap: @gap-md;
+		padding: 0;
+		position: relative;
+		z-index: 10;
+	}
+</style>

@@ -3,7 +3,9 @@
 		"moduleResolution": "node",
 		"module": "ES2022",
 		"target": "es2022",
-		"types": ["vite/client"],
+		"types": [
+			"vite/client"
+		],
 		"baseUrl": ".",
 		"paths": {
 			"@components/*": [
@@ -15,8 +17,14 @@
 			"@data/*": [
 				"src/data/*.ts"
 			],
-      "@images/*": [
-				"src/images/*.ts"
+			"@images/*": [
+				"src/images/*"
+			],
+			"@utils/*": [
+				"src/utils/*"
+			],
+			"@style/*": [
+				"src/utils/*"
 			],
 		},
 	}

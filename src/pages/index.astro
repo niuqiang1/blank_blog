@@ -6,104 +6,104 @@ import { profile } from '@data/profile'
 const title = '首页'
 
 const myPrefile = {
-  在下: profile.name,
-  企鹅: profile.qq,
-  微信: profile.wechat,
-  手机: profile.mobile
+	在下: profile.name,
+	企鹅: profile.qq,
+	微信: profile.wechat,
+	手机: profile.mobile,
+	搬砖: profile.job
 }
 ---
 
 <Layout title={title} deg="15">
-  <div class="profile">
-    <img class="bg-img" src={rect} width="100" alt="" />
-    <p class="bg-text bottom">MYSELF</p>
+	<div class="profile">
+		<img class="bg-img" src={rect} width="100" alt="" />
+		<p class="bg-text bottom">MYSELF</p>
 
-    <div class="profile-content">
-      <p class="bg-text top">MYSELF INSTRUCTIONS</p>
+		<div class="profile-content">
+			<p class="bg-text top">MYSELF INSTRUCTIONS</p>
 
-      <img class="avatar" src={avatar} alt="" />
-      <ul>
-        {
-          Object.entries(myPrefile).map(([k, v]) => (
-            <li>
-              <>
-                <span>{k}</span>
-                <span>{v}</span>
-              </>
-            </li>
-          ))
-        }
-      </ul>
-    </div>
-  </div>
+			<img class="avatar" src={avatar} alt="" />
+			<ul>
+				{
+					Object.entries(myPrefile).map(([k, v]) => (
+						<li>
+							<>
+								<span>{k}</span>
+								<span>{v}</span>
+							</>
+						</li>
+					))
+				}
+			</ul>
+		</div>
+	</div>
 </Layout>
 
-<style lang="less" is:global>
-  @import '../style/var.less';
-  .bg-text {
-    position: absolute;
-    color: @c-sub;
-    opacity: 0.3;
-  }
-  .profile {
-    margin: 0px auto;
-    .bg-img {
-      position: absolute;
-      right: 160px;
-      transform: scale(4);
-      opacity: 0.3;
-    }
-	.bg-text.bottom{
-		font-size: 100px;
-		font-weight: 800;
-		bottom: 150px;
-		left: calc(50% - 190px);
+<style lang="less">
+	@import '../style/var.less';
+	.bg-text {
+		position: absolute;
+		color: @c-sub;
+		opacity: 0.3;
 	}
+	.profile {
+		margin: 0px auto;
+		.bg-img {
+			position: absolute;
+			right: 160px;
+			transform: scale(4);
+			opacity: 0.3;
+		}
+		.bg-text.bottom {
+			font-size: 100px;
+			font-weight: 800;
+			bottom: 150px;
+			left: calc(50% - 190px);
+		}
 
-    .profile-content {
-      margin-top: 60px;
-      position: relative;
-      width: 50ch;
-      background-color: rgba(#fff, 0.6);
-      box-shadow: 0 2px 8px 0 rgba(99, 99, 99, 0.2);
-      padding: 80px 0px;
-      .bg-text {
-        &.top {
-          font-size: 30px;
-          left: 80px;
-          top: -20px;
-        }
-       
-      }
-      ul {
-        margin: 0px 40px 0px 130px;
-        li {
-          span {
-            display: inline-block;
-            &:first-child {
-              color: @c-desc;
-              width: 80px;
-            }
-            &:last-child {
-              color: @c-sub;
-              font-weight: 300;
-            }
-          }
-          + li {
-            margin-top: 20px;
-          }
-        }
-      }
+		.profile-content {
+			margin-top: 60px;
+			position: relative;
+			width: 50ch;
+			background-color: rgba(#fff, 0.6);
+			box-shadow: 0 2px 8px 0 rgba(99, 99, 99, 0.2);
+			padding: 80px 0px;
+			.bg-text {
+				&.top {
+					font-size: 30px;
+					left: 80px;
+					top: -20px;
+				}
+			}
+			ul {
+				margin: 0px 40px 0px 130px;
+				li {
+					span {
+						display: inline-block;
+						&:first-child {
+							color: @c-desc;
+							width: 80px;
+						}
+						&:last-child {
+							color: @c-sub;
+							font-weight: 300;
+						}
+					}
+					+ li {
+						margin-top: 20px;
+					}
+				}
+			}
 
-      .avatar {
-        width: 180px;
-        height: 200px;
-        background-color: beige;
-        position: absolute;
-        top: calc(50% - 90px);
-        left: -100px;
-        box-shadow: @box-shadow;
-      }
-    }
-  }
+			.avatar {
+				width: 180px;
+				height: 200px;
+				background-color: beige;
+				position: absolute;
+				top: calc(50% - 90px);
+				left: -100px;
+				box-shadow: @box-shadow;
+			}
+		}
+	}
 </style>

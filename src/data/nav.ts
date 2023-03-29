@@ -2,7 +2,7 @@
  * @Author: niuqiang
  * @Date: 2023-03-20 17:28:55
  * @LastEditors: niuqiang
- * @LastEditTime: 2023-03-20 17:28:59
+ * @LastEditTime: 2023-03-24 14:15:40
  * @FilePath: /blank_blog/src/data/nav.ts
  * @Description: 
  * 
@@ -10,7 +10,8 @@
  */
 export type NavItem = {
     title:string,
-    slug: string
+    slug: string,
+    isPage?: boolean
   }
   
   export const nav: NavItem[] = [
@@ -21,6 +22,7 @@ export type NavItem = {
     {
       title: '博客',
       slug: '/blog',
+      isPage:true
     },
     {
       title: '分类',
