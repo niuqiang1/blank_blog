@@ -1,7 +1,5 @@
 import astroRemark from '@astrojs/markdown-remark';
 import { defineConfig } from "astro/config";
-import partytown from "@astrojs/partytown";
-
 import mdx from "@astrojs/mdx";
 
 import react from "@astrojs/react";
@@ -9,9 +7,6 @@ import react from "@astrojs/react";
 // https://astro.build/config
 export default defineConfig( /** @type {import('astro').AstroUserConfig} */
   {
-    // experimental: {
-    // 	assets: true
-    // },
     markdown: {
       render: [astroRemark, {
         remarkPlugins: [],
@@ -31,6 +26,5 @@ export default defineConfig( /** @type {import('astro').AstroUserConfig} */
         theme: 'poimandres'
       },
       gfm: false
-    }), react(),
-    ]
+    }), react()]
   });
