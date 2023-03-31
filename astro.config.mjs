@@ -1,5 +1,7 @@
 import astroRemark from '@astrojs/markdown-remark';
 import { defineConfig } from "astro/config";
+import partytown from "@astrojs/partytown";
+
 import mdx from "@astrojs/mdx";
 
 import react from "@astrojs/react";
@@ -29,5 +31,10 @@ export default defineConfig( /** @type {import('astro').AstroUserConfig} */
       theme: 'poimandres'
     },
     gfm: false
-  }), react()]
+  }), react(),
+  partytown({
+    config: {
+      forward: ["dataLayer.push"],
+    },
+  }),]
 });
