@@ -11,7 +11,7 @@ keywords: ['Cartoon','Marvel_Comics','Anime','Animecore','Manga','Kawaii','Horro
 import MdjCard from "../../../components/MdjCard.tsx";
 
 <div style={{display:"grid", gridTemplateColumns: "repeat(2, 1fr)", gap:"30px"}}>
-{frontmatter.keywords.map(item=>  <MdjCard props={{...frontmatter, name:item}} client:load ></MdjCard>)}
+{frontmatter.keywords.map(item=>  <MdjCard props={{...frontmatter, name:item}} client:only="react"></MdjCard>)}
 </div>
 
 

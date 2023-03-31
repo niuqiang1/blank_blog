@@ -20,6 +20,17 @@ const bgDeg = `linear-gradient(${deg}deg, #fff 50%, #93d5dc 50%)`
 <!DOCTYPE html>
 <html lang="zh">
 	<Head title={title} desc={title} />
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-KHGH1PPXPW"
+	></script>
+	<script is:inline>
+		window.dataLayer = window.dataLayer || []
+		function gtag() {
+			dataLayer.push(arguments)
+		}
+		gtag('js', new Date())
+
+		gtag('config', 'G-KHGH1PPXPW')
+	</script>
 	<style define:vars={{ bgDeg }}>
 		body {
 			background: var(--bgDeg);
