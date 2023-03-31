@@ -1,26 +1,22 @@
 ---
 import Blog from '../../layouts/Blog.astro'
 import Head from '@components/Head'
-import { Post, publish } from '@data/post'
+import { getCollection } from 'astro:content'
 
 export async function getStaticPaths() {
-	const markdownFiles = await Astro.glob('../../content/**/*.md')
-	const posts = publish(markdownFiles)
+	const posts = await getCollection('blog')
 	return posts.map(post => {
 		return {
-			params: { post: post.slug },
+			params: { slug: post.slug },
 			props: { post: post }
 		}
 	})
 }
-
 const {
-	post: { Content },
+	post: { render },
 	post
 } = Astro.props
-console.log(post.img)
-
-// const data = await Astro.glob(`${post.img}`)
+const { Content } = await render()
 ---
 
 <Head title={post.title} desc={post.title} />
@@ -60,8 +56,9 @@ console.log(post.img)
 <div>
 	<Blog deg="50">
 		<div class="blog-detail">
-			<h1>{post.title}</h1>
-			<img src={post.img} alt="" />
+			<h2>{post.data.title}</h2>
+			{post.data.img && <img src={post.data.img} alt="" />}
+
 			<Content />
 		</div>
 	</Blog>

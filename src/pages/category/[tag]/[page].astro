@@ -4,25 +4,27 @@ import Card from '../../../components/Card.astro'
 import Pagination from '@components/Pagination'
 import Head from '@components/Head'
 import Tag from '@images/tag.svg'
-import { getCategorys, publish, type Post } from '@data/post'
-import { Page } from 'astro'
+import { getCollection, CollectionEntry } from 'astro:content'
+import { stringifyChunk } from 'astro/dist/runtime/server'
 
-export interface Props {
-	page: Page<Post>
+interface Props {
+	post: CollectionEntry<'blog'>
 }
 
 export async function getStaticPaths({ paginate }) {
-	const markdwonFiles = await Astro.glob('../../../content/**/*.md')
-	const allTags = getCategorys(markdwonFiles)
-	const allPosts = publish(markdwonFiles)
+	let published = await getCollection('blog')
+	let allTags = [...new Set(published.map(post => post.data.tag).flat())]
+
 	return allTags.map(tag => {
-		const filters = allPosts.filter(post => post?.tag?.includes(tag))
+		const filters = published.filter(p => p.data.tag.includes(tag))
 		return paginate(filters, { params: { tag }, pageSize: 3 })
 	})
 }
 
 const { page } = Astro.props
+
 const { tag } = Astro.params
+
 const pageStyle: any = {
 	position: 'absolute',
 	bottom: '30px',
@@ -32,7 +34,6 @@ const pageStyle: any = {
 ---
 
 <Head title={tag} desc={tag} />
-
 <Blog deg="-25">
 	<div class="blog">
 		<p><img src={Tag} alt="" />{tag.toUpperCase()}</p>
@@ -40,12 +41,13 @@ const pageStyle: any = {
 		<p class="bg-text bottom">{tag.toUpperCase()}</p>
 		<ul role="list" class="link-card-grid">
 			{
-				page.data.map(p => (
+				page.data.map(({ slug, data, render }) => (
 					<Card
-						href={`/post/${p.slug}`}
-						title={p.title}
-						body={p.desc}
-						img={p.cover as unknown as string}
+						href={`/post/${slug}`}
+						title={data.title}
+						desc={data.desc}
+						img={data.cover as unknown as string}
+						render={render}
 					/>
 				))
 			}

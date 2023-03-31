@@ -1,0 +1,42 @@
+---
+title: Midjourney主题： Realism/Abstraction(现实主义/抽象)
+date: 2023-03-30
+author: hhz
+desc: Realistic,HyperReal,Hyperrealistic,Photorealistic,Photorealism
+cover: '/images/2023/03/mdj.png'
+tag: ["AI","Midjourney"]
+---
+import Realistic from '@images/mdj/Realistic.webp';
+import HyperReal from '@images/mdj/HyperReal.webp';
+import Hyperrealistic from '@images/mdj/Hyperrealistic.webp';
+import Photorealistic from '@images/mdj/Photorealistic.webp';
+import Photorealism from '@images/mdj/Photorealism.webp';
+import Dreamy from '@images/mdj/Dreamy.webp';
+
+export const Realism = [
+    ['Realistic',Realistic],
+    ['Dreamy',Dreamy],
+    ['HyperReal',HyperReal],
+    ['Hyperrealistic',Hyperrealistic],
+    ['Photorealistic',Photorealistic],
+    ['Photorealism',Photorealism]
+    ]
+
+import MdjCard from "../../../components/MdjCard.tsx";
+
+export const JJ = Realism.map(item=>{
+    return {
+         name: item[0],
+         url: item[1] 
+    }
+})
+
+<div style={{display:"grid", gridTemplateColumns: "repeat(2, 1fr)", gap:"30px"}}>
+{JJ.map(item=>  <MdjCard props={{...frontmatter, ...item}} client:load ></MdjCard>)}
+
+</div>
+
+
+
+
+   

@@ -1,11 +1,12 @@
 ---
 export interface Props {
 	title: string
-	body: string
+	render: Function
 	href: string
 	img?: string
+	desc: string
 }
-const { href, title, body, img } = Astro.props
+const { href, title, render, img, desc } = Astro.props
 ---
 
 <li class="link-card">
@@ -22,7 +23,7 @@ const { href, title, body, img } = Astro.props
 					</div>
 				)
 			}
-			{body}
+			<span class="desc">{desc}</span>
 		</p>
 	</a>
 </li>
@@ -73,5 +74,8 @@ const { href, title, body, img } = Astro.props
 		img {
 			max-height: 180px;
 		}
+	}
+	.desc {
+		word-wrap: break-word;
 	}
 </style>

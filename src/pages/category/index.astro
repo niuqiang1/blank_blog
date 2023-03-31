@@ -1,11 +1,10 @@
 ---
 import Layout from '../../layouts/Layout.astro'
-import { Post, getCategorys } from '@data/post'
 import rect from '@images/rect.svg'
+import { getCollection, CollectionEntry } from 'astro:content'
 
-const markdownFiles = await Astro.glob('../../content/**/*.md')
-const tags = getCategorys(markdownFiles)
-console.log(tags)
+const published = await getCollection('blog')
+const tags = [...new Set(published.map(post => post.data.tag).flat())]
 ---
 
 <Layout title="分类" deg="-85">
@@ -17,7 +16,7 @@ console.log(tags)
 			{
 				tags.map(tag => (
 					<li>
-						<a href={`category/${tag}/1`}>{tag}</a>
+						<a href={`/category/${tag}/1`}>{tag}</a>
 					</li>
 				))
 			}

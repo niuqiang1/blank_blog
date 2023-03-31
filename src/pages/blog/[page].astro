@@ -3,16 +3,17 @@ import Layout from '../../layouts/Layout.astro'
 import Card from '../../components/Card.astro'
 import Pagination from '@components/Pagination'
 import rect from '@images/rect.svg'
-import { publish, type Post } from '@data/post'
-import { Page } from 'astro'
+import { getCollection, CollectionEntry } from 'astro:content'
 
-export interface Props {
-	page: Page<Post>
+interface Props {
+	post: CollectionEntry<'blog'>
 }
 
 export async function getStaticPaths({ paginate }) {
-	const markdwonFiles = await Astro.glob('../../content/**/*.md')
-	const published = publish(markdwonFiles)
+	let published = await getCollection('blog')
+	published = published.sort((a, b) => {
+		return b.data.date.valueOf() - a.data.date.valueOf()
+	})
 	return paginate(published, { pageSize: 3 })
 }
 
@@ -29,14 +30,16 @@ const pageStyle: any = {
 	<div class="blog">
 		<img class="bg-img" src={rect} width="100" alt="" />
 		<p class="bg-text bottom">ALL BLOGS</p>
+
 		<ul role="list" class="link-card-grid">
 			{
-				page.data.map(p => (
+				page.data.map(({ data, slug, render }) => (
 					<Card
-						href={`/post/${p.slug}`}
-						title={p.title}
-						body={p.desc}
-						img={p.cover as unknown as string}
+						href={`/post/${slug}`}
+						title={data.title}
+						render={render}
+						desc={data.desc}
+						img={data.cover as unknown as string}
 					/>
 				))
 			}
