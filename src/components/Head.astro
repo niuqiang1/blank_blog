@@ -28,10 +28,11 @@ if (!desc) {
 	{title && <title>{`${title}-${profile.name}的小站`}</title>}
 	{desc && <meta name="description" content={desc} />}
 	<script
-		type="text/partytown"
+		async
+		is:inline
 		src="https://www.googletagmanager.com/gtag/js?id=G-KHGH1PPXPW"
 	></script>
-	<script type="text/partytown">
+	<script is:inline>
 		window.dataLayer = window.dataLayer || []
 		function gtag() {
 			dataLayer.push(arguments)
