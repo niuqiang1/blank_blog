@@ -1,0 +1,22 @@
+---
+title: Midjourney主题： Cartoons, Anime, and Comics(卡通/动漫)
+date: 2023-04-01
+author: hhz
+desc: Midjourney主题： Cartoons, Anime, and Comics(卡通/动漫)
+cover: '/images/2023/03/mdj.png'
+tag: ["AI","Midjourney"]
+keywords: ['Cartoon','Marvel_Comics','Anime','Animecore','Manga','Kawaii','Horror_Anime','UwU']
+---
+
+import MdjCard from "../../../components/MdjCard.tsx";
+
+
+
+<div style={{display:"grid", gridTemplateColumns: "repeat(2, 1fr)", gap:"30px"}}>
+{frontmatter.keywords.map(item=>  <MdjCard props={{...frontmatter, name:item}} client:only="react"></MdjCard>)}
+</div>
+
+
+
+
+   

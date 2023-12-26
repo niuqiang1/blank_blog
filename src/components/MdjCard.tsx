@@ -2,13 +2,15 @@
 import { useEffect, useState } from "react"
 export default function MdjCard({ props, children }) {
   const [url, setUrl] = useState('')
-  const [isHover, setHover] = useState(false)
+  const [isHover, setHover] = useState(false);
 
 
 
 
-  const handleMouseEnter = () => {
+  const handleMouseEnter = async () => {
+
     setHover(true)
+
   }
   const handleMouseLeave = () => {
     setHover(false)
